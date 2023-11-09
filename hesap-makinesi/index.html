@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta etiketleri -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basit Hesap Makinesi</title>
+</head>
+
+<body>
+    <!-- Hesap makinesi bileşenlerinin HTML yapısı -->
+    <div class="calculator">
+        <!-- Sonuç gösterim alanı ve butonlar -->
+        <input type="text" id="result" readonly>
+        <div class="buttons">
+            <!-- Butonlar -->
+            <button class="clear">C</button>
+            <button class="operator">/</button>
+            <button class="operator">*</button>
+            <button class="operator">-</button>
+            <button class="number">7</button>
+            <button class="number">8</button>
+            <button class="number">9</button>
+            <button class="operator">+</button>
+            <button class="number">4</button>
+            <button class="number">5</button>
+            <button class="number">6</button>
+            <button class="equals">=</button>
+            <button class="number">1</button>
+            <button class="number">2</button>
+            <button class="number">3</button>
+            <button class="number">0</button>
+            <button class="decimal">.</button>
+        </div>
+    </div>
+
+    <style>
+        /* CSS Stili */
+        /* Genel stil tanımları */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+        }
+
+        .calculator {
+            /* Hesap makinesi stil tanımları */
+            background-color: #f2f2f2;
+            padding: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+            border: solid 1px #ccc;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            margin-top: 40px;
+        }
+
+        #result {
+            /* Sonuç gösterim alanı stil tanımları */
+            width: 100%;
+            padding: 10px;
+            font-size: 24px;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3) inset;
+            border-radius: 5px;
+        }
+
+        .buttons {
+            /* Buton konteyneri stil tanımları */
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            /* Buton genel stil tanımları */
+            padding: 10px;
+            font-size: 24px;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            /* Buton üzerine gelindiğinde stil tanımları */
+            background-color: #ddd;
+        }
+
+        .clear {
+            /* Temizleme butonu stil tanımları */
+            background-color: #ff4136;
+            color: #fff;
+        }
+
+        .number,
+        .decimal {
+            /* Sayı butonları stil tanımları */
+            background-color: #fff;
+            color: #333;
+        }
+
+        .operator {
+            /* Operatör butonları stil tanımları */
+            background-color: #0074d9;
+            color: #fff;
+        }
+
+        .equals {
+            /* Eşittir butonu stil tanımları */
+            background-color: #01ff70;
+            grid-row: span 3;
+            color: #fff;
+        }
+    </style>
+
+    <script>
+        // JavaScript kodu
+        // Butonlar ve sonuç alanı elementlerinin seçilmesi
+        const buttonsEl = document.querySelectorAll("button");
+        const inputFieldEl = document.getElementById("result");
+
+        // Butonlara tıklama event'lerinin atanması
+        for (let i = 0; i < buttonsEl.length; i++) {
+            buttonsEl[i].addEventListener("click", () => {
+                const buttonValue = buttonsEl[i].textContent;
+                // Buton değerlerine göre işlemlerin yapılması
+                if (buttonValue === "C") {
+                    clearResult();
+                } else if (buttonValue === "=") {
+                    calculateResult();
+                } else {
+                    appendValue(buttonValue);
+                }
+            });
+        }
+
+        // Sonucu temizleme fonksiyonu
+        function clearResult() {
+            inputFieldEl.value = "";
+        }
+
+        // Sonucu hesaplama fonksiyonu
+        function calculateResult() {
+            inputFieldEl.value = eval(inputFieldEl.value);
+        }
+
+        // Değer ekleme fonksiyonu
+        function appendValue(buttonValue) {
+            inputFieldEl.value += buttonValue;
+        }
+    </script>
+</body>
+</html>
